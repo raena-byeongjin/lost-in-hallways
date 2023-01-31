@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 3379179381
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: safeclass.unity3d
+      Dependencies: {}
