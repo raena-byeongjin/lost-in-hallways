@@ -1,0 +1,10 @@
+*/.svn
+*/.vs
+*/Library
+*/Logs
+*/obj
+*/UserSettings
+91 Release
+.vsconfig
+*.sln
+*.csproj
