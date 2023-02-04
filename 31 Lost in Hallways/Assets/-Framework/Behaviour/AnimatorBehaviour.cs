@@ -37,7 +37,7 @@ public class AnimatorBehaviour : MonoBehaviour
 	}
 
 	//애니메이터 객체를 얻기 위한 함수
-	Animator Animator()
+	public Animator Animator()
 	{
 		return m_animator;
 	}

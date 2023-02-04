@@ -480,4 +480,10 @@ public class objCamera : TransformBehaviour
 			Camera().fieldOfView = value;
 		}
 	}
+
+	//위치를 얻기 위한 함수
+	public virtual Vector3 GetPosition()
+	{
+		return Transform().position;
+	}
 }

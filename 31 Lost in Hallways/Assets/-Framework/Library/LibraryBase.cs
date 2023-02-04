@@ -548,7 +548,7 @@ public class LibraryBase
 		Component[] comArray = gameObject.GetComponentsInChildren( typeof(Renderer), true );
 		foreach( Renderer renderer in comArray )
 		{
-			foreach( Material material in renderer.materials )
+			foreach( Material material in renderer.sharedMaterials )
 			{
 				if( material==null ) continue;
 				//material.GetTag("RenderType", true, "Nothing");

@@ -16,10 +16,6 @@ public class ApplicationBehaviour : CApp
 //		ViewLoading.SetCallback( SceneCharacterSelect.funcGameStart );
 //		Download.Task( ViewCharacterSelect );
 //		ViveAppsEventListener.This.Startup();
-
-#if UNITY_EDITOR
-		app.ViewBottom.ON();
-#endif
 	}
 
 	[NonSerialized] public CProc Proc = null;

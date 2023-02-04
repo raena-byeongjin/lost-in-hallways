@@ -76,7 +76,7 @@ public class CameraBehaviour : objCamera
 	}
 
 	//위치를 얻기 위한 함수
-	public Vector3 GetPosition()
+	public override Vector3 GetPosition()
 	{
 		return Transform().position;
 	}
