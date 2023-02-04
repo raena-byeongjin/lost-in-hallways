@@ -12,6 +12,8 @@ public class CSafeClass : SceneFramework
 	{
 		app.CharacterStatic.AllDownload();
 		app.SceneStatic.Load( "b2f71d11d5gga376c35a", true, funcSceneLoad );
+
+		ViewSafeClass.ON();
 	}
 
 	void funcSceneLoad( object wParam=null, object lParam=null )
