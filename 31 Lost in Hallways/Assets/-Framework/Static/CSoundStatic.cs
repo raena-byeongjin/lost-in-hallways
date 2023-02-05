@@ -127,8 +127,6 @@ public class CSoundStatic : AppsItemListener
 	//사운드를 재생하기 위한 함수
 	public void funcPlay( object wParam=null, object lParam=null )
 	{
-	Debug.Log(wParam);
-	Debug.Log(lParam);
 		if( wParam==null || wParam.GetType()!=typeof(SoundDesc) ) return;
 		if( lParam==null || lParam as tagAssetBundle==null ) return;
 
