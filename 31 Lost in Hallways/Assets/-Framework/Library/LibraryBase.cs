@@ -1831,4 +1831,34 @@ public class LibraryBase
 	{
 		return BeforeTime((int)value);
 	}
+
+	public static Material Instance( Material sample )
+	{
+		if( sample==null ) return null;
+
+		Material material = new Material(sample.shader);
+		material.CopyPropertiesFromMaterial(sample);
+
+#if UNITY_EDITOR
+		material.name = sample.name;
+		if( !material.name.EndsWith(" (Instance)") )
+		{
+			material.name = sample.name+" (Instance)";
+		}
+#endif
+
+		return material;
+	}
+
+	public static bool IsDefaulUIMaterial( Material material )
+	{
+//		if( material==null ) return false; //(NULL)값을 허용함
+
+		if( material==null || material.name=="Default UI Material" )
+		{
+			return true;
+		}
+
+		return false;
+	}
 }

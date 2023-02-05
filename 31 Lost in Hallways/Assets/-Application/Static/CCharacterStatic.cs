@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
+using System;
 
 //식재료 정보를 처리하기 위한 클래스
 public class CCharacterStatic : AppsItemListener
@@ -47,6 +48,25 @@ public class CCharacterStatic : AppsItemListener
 		return null;
     }
 
+	//리소스를 다운로드하기 위한 함수
+	public override void Download( tagAppsItem appsitem, Action<object, object> func=null, object wParam=null, object lParam=null )
+	{
+		if( appsitem==null ) return;
+//		if( func==null ) return;	//(NULL)값을 허용함
+//		if( wParam==null ) return;	//(NULL)값을 허용함
+//		if( lParam==null ) return;	//(NULL)값을 허용함
+
+		base.Download( appsitem, func, wParam, lParam );
+
+		tagCharacterStatic characterstatic = appsitem as tagCharacterStatic;
+		if( characterstatic==null ) return;
+
+		if( characterstatic.banner!=null )
+		{
+			characterstatic.banner.Download();
+		}
+	}
+
 	//로컬에 저장된 정보를 불러오기 위한 함수
 	public override void OnLoadCache( tagAppsItem appsitem, AppsParameter col=null )
 	{
@@ -58,6 +78,7 @@ public class CCharacterStatic : AppsItemListener
 
 		if( col!=null )
 		{
+			characterstatic.banner = AppsFunc.Parse( characterstatic.banner, col.Get("banner") );
 		}
 
 		if( !GetList().Contains(characterstatic) )
@@ -74,6 +95,8 @@ public class CCharacterStatic : AppsItemListener
 
 		tagCharacterStatic characterstatic = appsitem as tagCharacterStatic;
 		if( characterstatic==null ) return;
+
+		CXml.WriteNodeValue( xmlWriter, "banner", characterstatic.banner );
 	}
 
 	//XML 파일을 불러오기 위한 함수
@@ -84,5 +107,7 @@ public class CCharacterStatic : AppsItemListener
 
 		tagCharacterStatic characterstatic = appsitem as tagCharacterStatic;
 		if( characterstatic==null ) return;
+
+		characterstatic.banner = CXml.GetChildValue( pNode, characterstatic.banner, "banner" );
 	}
 }
