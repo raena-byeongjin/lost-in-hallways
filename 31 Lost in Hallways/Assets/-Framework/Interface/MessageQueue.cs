@@ -26,13 +26,13 @@ public class MessageQueue
 		return ApplicationBehaviour.This.MessageQueue.Is( func, wParam, lParam );
 	}
 
-	public static tagMessageQueue Skip( Action<object, object> func, object wParam=null, object lParam=null, float delay=0f )
+	public static tagMessageQueue Skip( Action<object, object> func, object wParam=null, object lParam=null, float delay=0f, int nSkip=1 )
 	{
 		if( func==null ) return null;
 //		if( wParam==null ) return null;	//(NULL)값을 허용함
 //		if( lParam==null ) return null;	//(NULL)값을 허용함
 
-		return ApplicationBehaviour.This.MessageQueue.Skip( func, wParam, lParam, delay );
+		return ApplicationBehaviour.This.MessageQueue.Skip( func, wParam, lParam, delay, nSkip );
 	}
 
 	public static void Cancel( Action<object, object> func, object wParam=null, object lParam=null )

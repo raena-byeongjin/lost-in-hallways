@@ -14,9 +14,21 @@ public class StickBehaviour : RectTransformBehaviour
 		}
 	}
 
-	public void Refresh()
+	void Update()
 	{
-		Transform().position = Library.WorldToCanvasPoint(Target().position+vAdd);
+		Refresh();
+	}
+
+	public void Refresh( CameraBehaviour camerabehaviour=null )
+	{
+//		if( camerabehaviour==null ) return; //(NULL)값을 허용함
+
+		if( camerabehaviour==null )
+		{
+			camerabehaviour = Framework.Camera();
+		}
+
+		Transform().position = Library.WorldToCanvasPoint( camerabehaviour, Target().position+vAdd );
 	}
 
 	//타깃을 설정하기 위한 함수

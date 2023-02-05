@@ -15,7 +15,7 @@ public class ViewStick : ViewBehaviour
 	}
 
 	//인터페이스를 활성화 하기 위한 함수
-	public static StickBehaviour ON( string value, Transform target, float height )
+	public static StickBehaviour ON( string value, Transform target, float height=0f )
 	{
 		if( !Library.Is(value) ) return null;
 		if( target==null ) return null;

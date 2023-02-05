@@ -412,6 +412,33 @@ public class LibraryBase
         return new Color( color.r, color.g, color.b, a );
     }
 
+	//색상 값을 얻기 위한 함수
+    public static Color Color( string value, float a=1f )
+    {
+		if( !Is(value) ) return new Color();
+
+		float r = 0f;
+		float g = 0f;
+		float b = 0f;
+
+		if( value.Length>=2 )
+		{
+			r = HexToDec(value.Substring(0,2))/255f;
+		}
+
+		if( value.Length>=4 )
+		{
+			g = HexToDec(value.Substring(2,2))/255f;
+		}
+
+		if( value.Length>=6 )
+		{
+			b = HexToDec(value.Substring(4,2))/255f;
+		}
+
+        return new Color( r, g, b, a );
+    }
+
 	//월드 좌표를 캔버스 좌표로 변환하기 위한 함수
 	public static Vector3 CanvasToWorldPoint( CanvasBehaviour canvas, CameraBehaviour camera, Vector3 point )
 	{
@@ -485,6 +512,15 @@ public class LibraryBase
 		if( canvas==null ) return new Vector3();
 
 		return ScreenToCanvasPoint( canvas, WorldToScreenPoint(camera, point) );
+	}
+
+	//월드 좌표를 캔버스 좌표로 변환하기 위한 함수
+	public static Vector3 WorldToCanvasPoint( CameraBehaviour camera, Vector3 point )
+	{
+		if( camera==null ) return new Vector3();
+		if( camera.Get()==null ) return new Vector3();
+
+		return WorldToCanvasPoint( camera, MainUI.Canvas(), point );
 	}
 
 	//월드 좌표를 캔버스 좌표로 변환하기 위한 함수
@@ -617,7 +653,7 @@ public class LibraryBase
 
         int result = 0;
 
-		if( code.Length>2 )
+		if( code.Length>=2 )
 		{
 			result += HexToDecByte( code.Substring( 0, 1 ) ) * 16;
 			result += HexToDecByte( code.Substring( 1, 1 ) );

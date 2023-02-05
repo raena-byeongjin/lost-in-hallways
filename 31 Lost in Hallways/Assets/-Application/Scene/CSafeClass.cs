@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CSafeClass : SceneFramework
 {
-	private List<Camera> Cameras = new List<Camera>();
-	private Camera m_camera = null;
+	private List<CameraBehaviour> Cameras = new List<CameraBehaviour>();
+	private CameraBehaviour m_camera = null;
 
 	//인터페이스를 활성화 하기 위한 함수
 	public override void ON()
@@ -22,7 +23,12 @@ public class CSafeClass : SceneFramework
 		if( wParam==null || wParam.GetType()!=typeof(Scene) ) return;
 
 		Scene scene = (Scene)wParam;
+
 		Component[] comArray = null;
+		PhysicsRaycaster racaster = null;
+		CameraBehaviour camerabehaviour = null;
+		GameObject cameraObject = null;
+
 		foreach( GameObject gameObject in scene.GetRootGameObjects() )
 		{
 			AssetLoader.ON( gameObject.transform, gameObject );
@@ -30,11 +36,25 @@ public class CSafeClass : SceneFramework
 			comArray = gameObject.GetComponentsInChildren( typeof(Camera), true );
 			foreach( Camera camera in comArray )
 			{
-				Cameras.Add( camera );
+				cameraObject = camera.gameObject;
+				camerabehaviour = cameraObject.GetComponent(typeof(CameraBehaviour)) as CameraBehaviour;
+				if( camerabehaviour==null )
+				{
+					camerabehaviour = cameraObject.AddComponent(typeof(CameraBehaviour)) as CameraBehaviour;
+				}
+
+				Cameras.Add( camerabehaviour );
 
 				if( m_camera==null && camera.isActiveAndEnabled )
 				{
-					m_camera = camera;
+					ChangeCamera( camerabehaviour );
+					m_camera = camerabehaviour;
+				}
+
+				racaster = camera.GetComponent(typeof(PhysicsRaycaster)) as PhysicsRaycaster;
+				if( racaster==null )
+				{
+					racaster = camera.gameObject.AddComponent(typeof(PhysicsRaycaster)) as PhysicsRaycaster;
 				}
 			}
 		}
@@ -83,33 +103,38 @@ public class CSafeClass : SceneFramework
 		if( Cameras.Count>=2 )
 		{
 			bool isSkip = false;
-			foreach( Camera camera in Cameras )
+
+			foreach( CameraBehaviour camerabehaviour in Cameras )
 			{
 				if( isSkip )
 				{
-					ChangeCamera( m_camera, camera );
+					ChangeCamera( camerabehaviour );
 					return;
 				}
 				else
-				if( camera==m_camera )
+				if( camerabehaviour==m_camera )
 				{
 					isSkip = true;
 				}
 			}
 
-			ChangeCamera( m_camera, Cameras[0] );
+			ChangeCamera( Cameras[0] );
 		}
 	}
 
-	void ChangeCamera( Camera pre, Camera change )
+	void ChangeCamera( CameraBehaviour change )
 	{
-		if( pre==null ) return;
 		if( change==null ) return;
-		if( pre==change ) return;
+		if( m_camera==change ) return;
 
-		Library.Inactive( pre.gameObject );
+		if( m_camera!=null )
+		{
+			Library.Inactive( m_camera.gameObject );
+		}
+
 		Library.Active( change.gameObject );
 
+		Framework.Set(change);
 		m_camera = change;
 	}
 }
