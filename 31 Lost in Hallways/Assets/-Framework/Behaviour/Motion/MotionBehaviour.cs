@@ -4,8 +4,8 @@ using UnityEngine;
 public class MotionBehaviour : DelayBehaviour
 {
 	private float fLerp = 0f;
-	protected float fSpeed = 1f;
-	protected float fPow = 2f;
+	public float fSpeed = 1f;
+	public float fPow = 2f;
 
 	private END_ACTION nEndAction = END_ACTION.NOTHING;
 	private tagCallback callback = null;
@@ -54,7 +54,7 @@ public class MotionBehaviour : DelayBehaviour
 	}
 
 	//인터페이스를 활성화 하기 위한 함수
-	protected void ON( float transit=-1f, float pow=-1f, float delay=-1f, END_ACTION nEndAction=END_ACTION.NOTHING )
+	public void ON( float transit=-1f, float pow=-1f, float delay=-1f, END_ACTION nEndAction=END_ACTION.NOTHING )
 	{
 		fLerp = 0f;
 

@@ -121,7 +121,7 @@ public class CSoundStatic : AppsItemListener
 		if( soundstatic==null ) return null;
 //		if( parent==null ) return null;	//(NULL)값을 허용함
 
-		return Play( soundstatic, delay, parent );
+		return Play( soundstatic, false, delay, parent );
 	}
 
 	//사운드를 재생하기 위한 함수

@@ -2,4 +2,5 @@
 [System.Serializable]
 public class tagCharacterStatic : tagAppsItem
 {
+	public tagTexture banner = null;
 }

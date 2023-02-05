@@ -314,7 +314,12 @@ public class PeopleEventListener : AppsEventListener
 			app.Download.Complete();
 		}
 
-		app.ViewLoading.OFF( this );
+		//Complete 처리하면서 새로운 다운로드가 발생했을 수 있기 때문에
+		//다운로드 여부를 다시 확인함
+		if( !app.Download.Is() )
+		{
+			app.ViewLoading.OFF( this );
+		}
 	}
 
 	//아이템 정보를 얻기 위한 함수

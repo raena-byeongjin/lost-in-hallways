@@ -12,9 +12,16 @@ public class Bgsound
 			return ApplicationBehaviour.This.Bgsound.Play( bgsound.clip, bgsound.volume );
 		}
 		else
-		if( bgsound.AssetBundle()!=null && bgsound.AssetBundle().IsLoad() )
+		if( bgsound.AssetBundle()!=null && bgsound.AssetBundle().Is() )
 		{
-			ApplicationBehaviour.This.BgsoundStatic.AsyncLoad(bgsound);
+			if( bgsound.AssetBundle().IsLoad() )
+			{
+				ApplicationBehaviour.This.BgsoundStatic.AsyncLoad(bgsound);
+			}
+			else
+			{
+				bgsound.Download( funcPlay );
+			}
 		}
 
 		return null;
@@ -25,5 +32,16 @@ public class Bgsound
 	{
 		if( !Library.Is(value) ) return null;
 		return ApplicationBehaviour.This.BgsoundStatic.FindFromId(value) as tagBgsoundStatic;
+	}
+
+	static void funcPlay( object wParam=null, object lParam=null )
+	{
+		if( lParam==null || lParam as tagBgsoundStatic==null ) return;
+
+		tagBgsoundStatic bgsoundstatic = lParam as tagBgsoundStatic;
+		if( bgsoundstatic!=null && bgsoundstatic.AssetBundle().IsLoad() )
+		{
+			ON(bgsoundstatic);
+		}
 	}
 }

@@ -398,9 +398,13 @@ public class AppsItemListener : FrameworkBehaviour
 	}
 
 	//리소스를 다운로드하기 위한 함수
-	public virtual void Download( string id, Action<object, object> func=null, object wParam=null, object lParam=null )
+	public void Download( string id, Action<object, object> func=null, object wParam=null, object lParam=null )
 	{
 		if( !Library.Is(id) ) return;
+//		if( func==null ) return;	//(NULL)값을 허용함
+//		if( wParam==null ) return;	//(NULL)값을 허용함
+//		if( lParam==null ) return;	//(NULL)값을 허용함
+
 		Download( FindFromId(id), func, wParam, lParam );
 	}
 

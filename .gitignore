@@ -9,3 +9,7 @@
 *.sln
 *.csproj
 */Temp
+*/Assets/StreamingAssets/Android
+*/Assets/StreamingAssets/Textures
+*/Assets/StreamingAssets/Android.meta
+*/Assets/StreamingAssets/Textures.meta
