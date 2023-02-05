@@ -14,7 +14,7 @@ public class CAssetLoaderBase : FrameworkBehaviour
 			gameObject = transform.gameObject;
 		}
 
-		Component[] comArray = transform.GetComponentsInChildren(typeof(AssetComponent));
+		Component[] comArray = transform.GetComponentsInChildren( typeof(AssetComponent), true );
 		foreach( AssetComponent asset in comArray )
 		{
 			AssetComponent( asset, transform );

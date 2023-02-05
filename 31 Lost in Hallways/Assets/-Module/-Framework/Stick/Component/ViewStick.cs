@@ -66,4 +66,12 @@ public class ViewStick : ViewBehaviour
 		if( stickbehaviour==null ) return;
 		GetList().Remove( stickbehaviour );
 	}
+
+	public static void Refresh()
+	{
+		if( This!=null )
+		{
+			This.onChange( Framework.Camera() );
+		}
+	}
 }

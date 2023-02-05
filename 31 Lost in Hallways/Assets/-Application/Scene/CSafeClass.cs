@@ -136,5 +136,7 @@ public class CSafeClass : SceneFramework
 
 		Framework.Set(change);
 		m_camera = change;
+
+		ViewStick.Refresh();
 	}
 }

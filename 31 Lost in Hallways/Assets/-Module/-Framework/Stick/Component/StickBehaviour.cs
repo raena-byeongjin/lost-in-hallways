@@ -14,7 +14,7 @@ public class StickBehaviour : RectTransformBehaviour
 		}
 	}
 
-	void Update()
+	protected virtual void Start()
 	{
 		Refresh();
 	}
