@@ -36,7 +36,7 @@ public class objPanel : RectTransformBehaviour
 	}
 
 	//인터페이스를 활성화 하기 위한 함수
-	public bool ON()
+	public bool _ON()
 	{
 		app.Panel.Fore( this );
 
